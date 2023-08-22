@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=HP+Simplified+Jpan:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply leading-[normal] m-0;
+  font-size: 0.5rem !important;
+}
+*,
+::before,
+::after {
+  border-width: 0;
+}
+
+/* page 1 */
+.nav-container {
+  @apply bg-peachpuff flex flex-col p-10 text-center font-hp-simplified-jpan;
+
+  /* @apply overflow-hidden flex flex-col py-[38px] px-24 box-border items-end justify-end text-center text-21xl text-black font-hp-simplified-jpan; */
+  /* @apply flex bg-peachpuff p-5 justify-center text-center */
+  /* @apply w-[1440px]; */
+}
+
+.circle {
+  @apply grid place-items-center top-[0px] left-[0px] rounded-[50%] bg-white shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[82px] h-[83px];
+}
+
+.red {
+  @apply bg-tomato;
+}
+
+.desktop-9-resp {
+  @apply relative bg-white text-left text-21xl text-black font-inter;
+}
+
+.nav-items {
+  @apply relative  h-[100px];
+}
+
+.button-hover:hover {
+  @apply bg-tomato;
+}
+.button-hover:hover * {
+  @apply text-white;
+}
+
+.page-one-items {
+  @apply grid m-auto w-[50%] mt-10 gap-3 justify-center;
+  align-items: center;
+}
+
+.page1-textbox {
+  @apply [border:none] bg-[transparent] w-[40rem];
+}
+
+@media only screen and (min-width: 1024px) {
+  /* .page-one-items {
+    @apply bg-red-500;
+  } */
+  .nav-items {
+    @apply scale-100;
+  }
+  .nav-items > * {
+  }
+}
+
+/* /page 2 / */
