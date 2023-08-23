@@ -2,104 +2,109 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
+const Desktop9 = ({
+  formData,
+  setFormData,
+  formErrors,
+  setFormErrors,
+  activeLink,
+  setActiveLink,
+}) => {
+  const navigate = useNavigate();
+  const handleNextButtonSubmit = () => {
+    if (
+      formErrors.name1 === "" &&
+      formErrors.orgs === "" &&
+      formErrors.phone === "" &&
+      formErrors.email === ""
+    ) {
+      // Show alert if any of the fields are empty
+      navigate("/license-type");
+    } else {
+      alert("Please fill all required fields correctly ."); // Replace with your actual next page URL
+    }
+  };
+  const handlePage2ButtonSubmit = () => {
+    if (
+      formErrors.name1 === "" &&
+      formErrors.orgs === "" &&
+      formErrors.phone === "" &&
+      formErrors.email === ""
+    ) {
+      // Show alert if any of the fields are empty
+      navigate("/license-type");
+    } else {
+      alert("Please fill all required fields correctly ."); // Replace with your actual next page URL
+    }
+  };
+  const handlePage3ButtonSubmit = () => {
+    // console.log(formData);
 
-const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, setActiveLink }) => {
-  const navigate=useNavigate();
-  // const [phoneNumberError, setPhoneNumberError] = useState("empty");
-  // const [emailError, setEmailError] = useState("empty");
-  // const [orgsError, setOrgsError] = useState("empty");
-  // const [nameError, setNameError] = useState("empty");
-   const handleNextButtonSubmit = () => {
-    
-    // document.getElementById('nextPageLink').addEventListener('click', function(event) {
-    //   // Prevent the default link behavior
-    //   event.preventDefault();
-
-      if (formErrors.name1 === '' && formErrors.orgs==='' && formErrors.phone === '' && formErrors.email === '') {
-        // Show alert if any of the fields are empty
-        navigate('/license-type'); 
-      } else {
-        alert('Please fill all required fields correctly .');// Replace with your actual next page URL
-      }
-    //});
-      };
-      const handlePage2ButtonSubmit = () => {
-    
-        // document.getElementById('nextPageLink').addEventListener('click', function(event) {
-        //   // Prevent the default link behavior
-        //   event.preventDefault();
-    
-        if (formErrors.name1 === '' && formErrors.orgs==='' && formErrors.phone === '' && formErrors.email === '') {
-            // Show alert if any of the fields are empty
-            navigate('/license-type'); 
-          } else {
-            alert('Please fill all required fields correctly .');// Replace with your actual next page URL
-          }
-        //});
-          };
-      const handlePage3ButtonSubmit = () => {
-        console.log(formData)
-    
-        // document.getElementById('nextPageLink').addEventListener('click', function(event) {
-        //   // Prevent the default link behavior
-        //   event.preventDefault();
-    
-        if (formErrors.name1 === '' && formErrors.orgs==='' && formErrors.phone === '' && formErrors.email === '' && activeLink !== null) {
-            // Show alert if any of the fields are empty
-            navigate('/license-details'); 
-          } else {
-            alert('Please filll previous page deatils first.');// Replace with your actual next page URL
-          }
-        //});
-          };
-          const handlePage4ButtonSubmit = () => {
-    
-            // document.getElementById('nextPageLink').addEventListener('click', function(event) {
-            //   // Prevent the default link behavior
-            //   event.preventDefault();
-        
-               if (formErrors.name1 === '' && formErrors.orgs==='' && formErrors.phone === '' && formErrors.email === '' && activeLink !== null){
-                // Show alert if any of the fields are empty
-                navigate('/preview');  
-              } else {
-                alert('Please fill previous page details first .');// Replace with your actual next page URL
-              }
-            //});
-              };
+    if (
+      formErrors.name1 === "" &&
+      formErrors.orgs === "" &&
+      formErrors.phone === "" &&
+      formErrors.email === "" &&
+      activeLink !== null
+    ) {
+      // Show alert if any of the fields are empty
+      navigate("/license-details");
+    } else {
+      alert("Please filll previous page deatils first."); // Replace with your actual next page URL
+    }
+  };
+  const handlePage4ButtonSubmit = () => {
+    if (
+      formErrors.name1 === "" &&
+      formErrors.orgs === "" &&
+      formErrors.phone === "" &&
+      formErrors.email === "" &&
+      activeLink !== null
+    ) {
+      // Show alert if any of the fields are empty
+      navigate("/preview");
+    } else {
+      alert("Please fill previous page details first ."); // Replace with your actual next page URL
+    }
+  };
 
   const handleNameBlur = () => {
     if (!formData.name) {
-      setFormErrors({...formErrors,name1:"name is required"})
-    }  else {
-      setFormErrors({...formErrors,name1:""})
+      setFormErrors({ ...formErrors, name1: "name is required" });
+    } else {
+      setFormErrors({ ...formErrors, name1: "" });
     }
   };
- 
+
   const handleOrgsBlur = () => {
     if (!formData.organization) {
-      setFormErrors({...formErrors,orgs:"organisation is required"})
+      setFormErrors({ ...formErrors, orgs: "organisation is required" });
+    } else {
+      setFormErrors({ ...formErrors, orgs: "" });
     }
-    else{
-      setFormErrors({...formErrors,orgs:""})
-    }
-    };
-  
+  };
+
   const handlePhoneNumberBlur = () => {
     if (!formData.phone) {
-      setFormErrors({...formErrors,phone:"contact info is required"})
+      setFormErrors({ ...formErrors, phone: "contact info is required" });
     } else if (!/^\d{10}$/.test(formData.phone)) {
-      setFormErrors({...formErrors,phone:"please enter valid ten digit phone number"})
+      setFormErrors({
+        ...formErrors,
+        phone: "please enter valid ten digit phone number",
+      });
     } else {
-      setFormErrors({...formErrors,phone:""})
+      setFormErrors({ ...formErrors, phone: "" });
     }
   };
   const handleEmailBlur = () => {
     if (!formData.email) {
-      setFormErrors({...formErrors,email:"email is required"})
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
-      setFormErrors({...formErrors,email:"please enter valid email"})
+      setFormErrors({ ...formErrors, email: "email is required" });
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      setFormErrors({ ...formErrors, email: "please enter valid email" });
     } else {
-      setFormErrors({...formErrors,email:""})
+      setFormErrors({ ...formErrors, email: "" });
     }
   };
   return (
@@ -193,7 +198,7 @@ const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, s
           required
           value={formData.name}
           onChange={(e) => {
-            setFormData({ ...formData, name: e.target.value })
+            setFormData({ ...formData, name: e.target.value });
           }}
           onBlur={handleNameBlur}
           error={!!formErrors.name1}
@@ -208,13 +213,15 @@ const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, s
         <TextField
           className="page1-textbox"
           // sx={{ width: 724 }}
-         color="secondary"
+          color="secondary"
           variant="outlined"
           type="email"
           id="emailInput"
           required
           value={formData.email}
-          onChange={(e) => { setFormData({ ...formData, email: e.target.value }) }}
+          onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+          }}
           placeholder="Enter your Email"
           size="medium"
           margin="none"
@@ -236,7 +243,9 @@ const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, s
           variant="outlined"
           type="tel"
           value={formData.phone}
-          onChange={(e) => { setFormData({ ...formData, phone: e.target.value }) }}
+          onChange={(e) => {
+            setFormData({ ...formData, phone: e.target.value });
+          }}
           onBlur={handlePhoneNumberBlur}
           error={!!formErrors.phone}
           helperText={formErrors.phone}
@@ -262,7 +271,9 @@ const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, s
           placeholder="Enter Organization Name"
           size="medium"
           value={formData.organization}
-          onChange={(e) => { setFormData({ ...formData, organization: e.target.value }) }}
+          onChange={(e) => {
+            setFormData({ ...formData, organization: e.target.value });
+          }}
           onBlur={handleOrgsBlur}
           error={!!formErrors.orgs}
           helperText={formErrors.orgs}
@@ -271,8 +282,8 @@ const Desktop9 = ({ formData, setFormData,formErrors,setFormErrors,activeLink, s
         />
 
         <button
-                 id="nextPageLink"
-         onClick={handleNextButtonSubmit}
+          id="nextPageLink"
+          onClick={handleNextButtonSubmit}
           className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         >
           <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step  ->`}</div>
