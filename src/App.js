@@ -4,12 +4,14 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+import Home from "./pages/Home.js";
 import Desktop10 from "./pages/Desktop10";
 import Desktop9 from "./pages/Desktop9";
 import Desktop12 from "./pages/Desktop12";
 import Desktop15 from "./pages/Desktop15";
 import Desktop14 from "./pages/Desktop14";
 import Desktop11 from "./pages/Desktop11";
+import Decrypt from "./pages/Decrypt.js";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import "./";
@@ -94,8 +96,9 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route
-        path="/"
+        path="/customer-info"
         element={
           <Desktop9
             formData={formData}
@@ -134,6 +137,7 @@ function App() {
         path="/module-selector"
         element={<Desktop14 formData={formData} setFormData={setFormData} />}
       />
+      <Route path="/decrypt" element={<Decrypt />} />
     </Routes>
   );
 }

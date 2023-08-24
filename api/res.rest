@@ -1,0 +1,22 @@
+POST POST http://localhost:3002/encrypt
+Content-Type: application/json
+
+{
+    "data": {"id":"ba4df75f-01f2-4af9-985b-db2eecc2d600",
+"name":"Bv Kudva",
+"email":"kudvashantanu2002@gmail.com",
+"phone":"9945718012",
+"organization":"NMIT",
+"licenseType":"Demo",
+"startDate":"2023-08-24",
+"endDate":"2023-08-31",
+"noOfDays":7,
+"moduleSelected":["value1","value12","value3","value4","value5"],
+"licenseRestrictions":"",
+"comments":"",
+"timestamp":"2023-08-24T06:14:46.746Z",
+"description":"This file contains an encrypted message with all your details about the license you have apllied for and also the license"
+}
+
+}
+

@@ -66,7 +66,7 @@ function MyComponent({ formData, setFormData }) {
     }));
   };
 
-  // console.log(formData);
+  console.log(formData);
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);

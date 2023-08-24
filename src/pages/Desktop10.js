@@ -15,21 +15,24 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           noOfDays: 7,
           moduleSelected: Object.keys(data),
         });
-      } else if (activeLink === "trial") {
+      }
+      if (activeLink === "trial") {
         setFormData({
           ...formData,
           licenseType: "Trial",
           noOfDays: 30,
           moduleSelected: Object.keys(data),
         });
-      } else if (activeLink === "perpetual") {
+      }
+      if (activeLink === "perpetual") {
         setFormData({
           ...formData,
           licenseType: "Perpetual",
           noOfDays: 1,
           moduleSelected: [],
         });
-      } else if (activeLink === "production") {
+      }
+      if (activeLink === "production") {
         setFormData({
           ...formData,
           licenseType: "Production",
@@ -128,7 +131,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
         });
       }
 
-      navigate("/");
+      navigate("/customer-info");
     }
   };
 

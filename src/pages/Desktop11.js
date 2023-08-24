@@ -51,7 +51,7 @@ const Desktop11 = ({ formData, setFormData }) => {
       <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
           <div className="absolute left-[8rem]">
-            <Link className="circle [text-decoration:none]" to="/">
+            <Link className="circle [text-decoration:none]" to="/customer-info">
               <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
               <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                 Customer Info
