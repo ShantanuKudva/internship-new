@@ -12,7 +12,7 @@ const Desktop11 = ({ formData, setFormData }) => {
   const handleNumberOfDaysChange = (event) => {
     setNumberOfDays(event.target.value);
   };
-  console.log(formData);
+  // console.log(formData);
 
   const calculateEndDate = (numberOfDays, startDate) => {
     if (!numberOfDays || !startDate) {
@@ -30,7 +30,7 @@ const Desktop11 = ({ formData, setFormData }) => {
     });
   };
   const handleSubmit = (e) => {
-    console.log(formData.name)
+    // console.log(formData.name)
     fetch("http://localhost:3001/posts", {
       method: "POST",
       headers: {
@@ -39,7 +39,7 @@ const Desktop11 = ({ formData, setFormData }) => {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((data) => console.log("user info", data))
+      // .then((data) => console.log("user info", data))
       .catch((error) => console.error("Error fetching user data:", error));
   };
   useEffect(() => {
@@ -51,7 +51,7 @@ const Desktop11 = ({ formData, setFormData }) => {
       <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
           <div className="absolute left-[8rem]">
-            <Link className="circle [text-decoration:none]" to="/">
+            <Link className="circle [text-decoration:none]" to="/customer-info">
               <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
               <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                 Customer Info
@@ -114,18 +114,21 @@ const Desktop11 = ({ formData, setFormData }) => {
         <div className="grid gap-3">
           <div className="text-21xl font-bold text-black">Select Modules:</div>
           <div className="text-5xl font-medium">Modules to be enabled:</div>
-          { (formData.licenseType=== 'Demo' || formData.licenseType === 'Trial') ? (
-         <span>All modules have been seected</span>):(<Link
-          className="[text-decoration:none]"
-          to="/module-selector" 
-           
-          >
-            <div className="relative rounded-xl bg-dimgray-200 w-[341px] h-[62px]">
-              <div className="absolute top-3 left-14 text-5xl">
-                Click here to select
+          {formData.licenseType === "Demo" ||
+          formData.licenseType === "Trial" ? (
+            <span>All modules have been seected</span>
+          ) : (
+            <Link
+              className="[text-decoration:none] text-white"
+              to="/module-selector"
+            >
+              <div className="relative rounded-xl bg-dimgray-200 w-[341px] h-[62px]">
+                <div className="absolute top-3 left-14 text-5xl ">
+                  Click here to select
+                </div>
               </div>
-            </div>
-          </Link>)}
+            </Link>
+          )}
         </div>
 
         <div className="grid gap-3">
@@ -167,65 +170,9 @@ const Desktop11 = ({ formData, setFormData }) => {
           />
         </div>
 
-        {/* <div className="grid gap-5">
-          <div className="font-medium text-6xl">
-            When do you want to get started
-          </div>
-          <div className="flex gap-2">
-            <div className="grid">
-              <div className="text-xl">Start date</div>
-
-              <TextField
-                className="[border:none] bg-[transparent]"
-                sx={{
-                  width: 300,
-                  "& .MuiInputBase-input.Mui-disabled": {
-                    WebkitTextFillColor: "#000000",
-                  },
-                }}
-                color="secondary"
-                variant="outlined"
-                type="date"
-                id="dateInput"
-                placeholder="Default - Day of Application"
-                size="medium"
-                margin="none"
-                disabled={
-                  formData.licenseType === "Demo" ||
-                  formData.licenseType === "Trial"
-                }
-                onChange={(e) => {
-                  setFormData({ ...formData, startDate: e.target.value });
-                }}
-                value={formData.startDate}
-              />
-            </div>
-
-            <div className="grid">
-              <div className="text-xl">End Date</div>
-              <TextField
-                className="[border:none] bg-[transparent]"
-                sx={{
-                  width: 300,
-                  "& .MuiInputBase-input.Mui-disabled": {
-                    WebkitTextFillColor: "#000000",
-                  },
-                }}
-                color="secondary"
-                variant="outlined"
-                id="dateInput"
-                disabled
-                size="medium"
-                margin="none"
-                value={formData.endDate}
-              />
-            </div>
-          </div>
-        </div> */}
-
         <div className="grid gap-3">
           <div className="text-21xl font-bold">License Restrictions</div>
-          <div className="text-21xl"> Restricted "valid from date"</div>
+          <div className="text-5xl"> Restricted "valid from date"</div>
           <TextField
             className=""
             sx={{ width: 400 }}
@@ -234,7 +181,10 @@ const Desktop11 = ({ formData, setFormData }) => {
             type="date"
             value={formData.licenseRestrictionsDate}
             onChange={(e) => {
-              setFormData({ ...formData, licenseRestrictionsDate: e.target.value });
+              setFormData({
+                ...formData,
+                licenseRestrictionsDate: e.target.value,
+              });
             }}
             id="licenserestrictiondateinput"
             placeholder="Active only after dd/mm/yyyy"
@@ -243,7 +193,7 @@ const Desktop11 = ({ formData, setFormData }) => {
         </div>
 
         <div className="grid gap-3">
-          <div className="text-21xl"> Restricted "valid from time"</div>
+          <div className="text-5xl"> Restricted "valid from time"</div>
           <TextField
             className=""
             sx={{ width: 400 }}
@@ -252,7 +202,10 @@ const Desktop11 = ({ formData, setFormData }) => {
             type="time"
             value={formData.licenseRestrictionsTime}
             onChange={(e) => {
-              setFormData({ ...formData, licenseRestrictionsTime: e.target.value });
+              setFormData({
+                ...formData,
+                licenseRestrictionsTime: e.target.value,
+              });
             }}
             id="licenserestrictiontimeinput"
             placeholder="Active only after hh/mm/ss"

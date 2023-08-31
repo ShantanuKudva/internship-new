@@ -1,111 +1,171 @@
 import { useEffect, useState } from "react";
-import { Button, useScrollTrigger } from "@mui/material";
+import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import data from './data.json'
+import axios from "axios";
+// import License from "../api/models/License.js";
 
+const API_BASE = "http://localhost:3002";
 
+const Desktop12 = ({ formData, setFormData }) => {
+  // const [timestamp, settimestamp] = useState("");
 
-const Desktop12 = ({ formData ,setFormData}) => {
- 
- 
-  const [timestamp, settimestamp] = useState('');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
+  const [encryptedData, setEncryptedData] = useState({
+    timestamp: "",
+    encryptedLicense: "",
+    description: "",
+  });
 
   let [tempData, setTempData] = useState({});
-   const handleDownload = () => {
-    // if (formData.licenseType === "Demo" || formData.licenseType === "Trial") {
-    //   // Create a copy of formData and update moduleSelected with all modules from data.json
-    //   const updatedFormData = {
-    //     ...formData,
-    //     moduleSelected: Object.keys(data),
-    //   };
-      
-    //     // Update the formData state
-    //     setFormData(updatedFormData);
-    //   }
+  // const handleDownload = async () => {
+  //   settimestamp(new Date().toISOString());
+  //   setDescription(
+  //     "This file contains an encrypted message with all your details about the license you have apllied for and also the license"
+  //   );
+  //   // if (formData.licenseType === "Demo" || formData.licenseType === "Trial") {
+  //   //   const updatedFormData = {
+  //   //     ...formData,
+  //   //     moduleSelected: Object.keys(data),
+  //   //   };
 
-      if (formData.licenseType === "Perpetual" || formData.licenseType === "Production") {
-        // Filter the moduleSelected array to get an array of true values
-        const selectedModulesArray = Object.keys(formData.moduleSelected).filter(
-          (module) => formData.moduleSelected[module]
-        );
-      
-        // Create a copy of formData and update moduleSelected by appending selectedModulesArray
-        const updatedFormData = {
-          ...formData,
-          moduleSelected: [...formData.moduleSelected, ...selectedModulesArray],
-        };
+  //   //   setFormData(updatedFormData);
+  //   // }
+  //   try {
+  //     const response = await axios.post(API_BASE + "/encrypt", {
+  //       data: JSON.stringify(formData),
+  //     });
 
-        setFormData(updatedFormData);
-    }      
-    settimestamp(new Date().toISOString() );
-    setDescription("This file contains an encrypted message with all your details about the license you have apllied for and also the license");
-    // setFormData({ ...formData, timestamp:new Date().toISOString() });
-    // setFormData({ ...formData, description:"This file contains an encrypted message with all your details about the license you have apllied for and also the license"});
-  // if(formData.timestamp!==''&&formData.description!=='')
-  // {
-  //   const licenseData = JSON.stringify(formData);
-  //   const blob = new Blob([licenseData], { type: 'application/json' });
-  //   const blobURL = URL.createObjectURL(blob);
+  //     setEncryptedData({
+  //       timestamp: new Date().toISOString(),
+  //       description: description,
+  //       encryptedLicense: response.data.encryptedData,
+  //     });
 
-  //   const link = document.createElement('a');
-  //   link.href = blobURL;
-  //   link.download = 'formData.json';
-  //   link.click();
+  //     console.log(encryptedData);
+  //     alert("License Generated");
+  //   } catch (error) {
+  //     console.error("Encryption error:", error);
+  //   }
+  // };
 
-  //   setTimeout(() => {
-  //     URL.revokeObjectURL(blobURL);
-  //   }, 100);}
-   };
-   useEffect(() => {
-    // This effect will run whenever value1 and value2 change
-    // You can check if both values have been assigned and then proceed to download the JSON
+  //encryption
 
-    if (timestamp !== '' && description !== '') {
-      const updatedFormData = {
-        ...formData,
-        timestamp,
-        description,
+  // const handleEncrypt = async () => {
+  //   try {
+  //     const response = await axios.post(API_BASE + "/encrypt", {
+  //       data: JSON.stringify(formData),
+  //     });
+
+  //     setEncryptedData({
+  //       timestamp: new Date().toISOString(),
+  //       encryptedLicense: response.data.encryptedData,
+  //     });
+
+  //     console.log(encryptedData);
+  //     alert("License Generated");
+  //   } catch (error) {
+  //     console.error("Encryption error:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (timestamp !== "" && description !== "") {
+  //     const updatedFormData = {
+  //       ...formData,
+  //       timestamp,
+  //       description,
+  //     };
+
+  //     // const licenseData = JSON.stringify(updatedFormData);
+  //     const licenseData = JSON.stringify(encryptedData);
+
+  //     const blob = new Blob([licenseData], { type: "application/json" });
+  //     const blobURL = URL.createObjectURL(blob);
+
+  //     const link = document.createElement("a");
+  //     link.href = blobURL;
+  //     link.download = "license.json";
+  //     link.click();
+
+  //     setTimeout(() => {
+  //       URL.revokeObjectURL(blobURL);
+  //     }, 100);
+  //   }
+  // }, [timestamp, description]);
+
+  const handleDownload = async () => {
+    //first the licsnse will be encrypted
+    try {
+      const response = await axios.post(API_BASE + "/encrypt", {
+        data: JSON.stringify(formData),
+      });
+
+      const updatedEncryptedData = {
+        timestamp: new Date().toISOString(),
+        description:
+          "This JSON file contains an encrypted license for the software product you have applied for. It contains essential details about your license, including user information, license type, validity period, selected modules, and any additional comments. The data in this file is securely encrypted to ensure confidentiality and integrity during transmission and storage",
+        encryptedLicense: response.data.encryptedData,
       };
-      const licenseData = JSON.stringify(updatedFormData);
-    const blob = new Blob([licenseData], { type: 'application/json' });
-    const blobURL = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
-    link.href = blobURL;
-    link.download = 'license.json';
-    link.click();
+      // Update the state with the new encrypted data
+      setEncryptedData(updatedEncryptedData);
 
-    setTimeout(() => {
-      URL.revokeObjectURL(blobURL);
-    }, 100);
+      // Convert the updated data to JSON string
+      const licenseData = JSON.stringify(updatedEncryptedData);
+
+      // Create a blob and initiate download
+      const blob = new Blob([licenseData], { type: "application/json" });
+      const blobURL = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobURL;
+      link.download = "license.json";
+      link.click();
+
+      //to store in the database
+      const toStoreLicense = {
+        ...updatedEncryptedData,
+        name: formData.name,
+      };
+
+      const res = await axios.post(API_BASE + "/api/licenses", toStoreLicense);
+
+      // if (res.status === 201) {
+      //   alert("License generated, downloaded, and saved successfully!");
+      // } else {
+      //   alert(
+      //     "License generated and downloaded, but an error occurred while saving in the database."
+      //   );
+      // }
+
+      // Clean up after download
+      alert("License generated and downloaded successfully!");
+      setTimeout(() => {
+        URL.revokeObjectURL(blobURL);
+      }, 100);
+    } catch (error) {
+      console.error("Encryption error:", error);
+      alert("Error generating the license.");
     }
-  }, [timestamp, description]);
+  };
 
-  
-
-const navigate=useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("http://localhost:3001/posts")
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
         setTempData(data[data.length - 1]);
-         console.log(tempData);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
     <div className="desktop-9-resp">
-      {/* <div className="absolute top-[914px] left-[550px] w-[341px] h-[62px]">
-        <div className="absolute top-[0px] left-[0px] rounded-sm bg-limegreen w-[341px] h-[62px]" />
-        <div className="absolute top-[6px] left-[32px] flex items-center justify-center w-[278.35px] h-[50.47px]">{`Generate License  ->`}</div>
-      </div> */}
       <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
           <div className="absolute left-[8rem]">
-            <Link className="circle [text-decoration:none]" to="/">
+            <Link className="circle [text-decoration:none]" to="/customer-info">
               <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
               <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                 Customer Info
@@ -163,132 +223,69 @@ const navigate=useNavigate();
           </div>
         </div>
       </nav>
+      {/* the preview wasnt showing the current details as we used temData to access
+      things rather than using formData */}
+      {/* <div className="bg-salmon-100 h-[30rem] w-[60%] m-auto rounded-2xl mt-10 text-white py-10 overflow-y-scroll"> */}
 
-      {/* <div className="absolute top-[246px] left-[calc(50%_-_594px)] rounded-xl bg-salmon-100 w-[1188px] h-[634px] overflow-hidden" /> */}
-      <div className="bg-salmon-100 h-[30rem] w-[60%] m-auto rounded-2xl mt-10 text-white py-10 overflow-y-scroll">
-        {/* username */}
-        <div className="flex justify-evenly  border-2 border-black">
-          <div className="text-11xl">User Name: {tempData.name}</div>
-          <div className="grid gap-2">
-            <div className="text-5xl">Phone: {tempData.phone}</div>
-            <div className="text-5xl">Email: {tempData.email}</div>
+      <div className=" mx-[5rem] mt-5 m-auto grid gap-2">
+        <div className="text-11xl">
+          <span className="font-bold">User Name: </span>
+          {formData.name}
+        </div>
+        <div className="grid gap-2">
+          <div className="text-11xl">
+            <span className="font-bold">Phone Number: </span>
+            {formData.phone}
+          </div>
+          <div className="text-11xl">
+            <span className="font-bold">Email: </span>
+            {formData.email}
           </div>
         </div>
-
-        <div className="h-[calc(40vh - 100px)] mx-[5rem] m-auto grid gap-2">
-          <div className="text-11xl">Organization: {tempData.organization}</div>
-          <div className="text-11xl">License Type: {tempData.licenseType}</div>
-          <div className="text-11xl">Valid Upto: {tempData.endDate}</div>
-          <div className="text-11xl">License Duration: {tempData.noOfDays}</div>
-          <div>
-            <Button
-              className="cursor-pointer"
-              sx={{ width: 330 }}
-              variant="contained"
-              color="primary"
-             onClick={()=>{navigate('/selected-modules')}}
-            >{`Selected Modules ->`}</Button>
-          </div>
-          <div className="grid gap-2">
-            <div className="text-11xl font-bold">License Restrictions</div>
-            <div className="text-11xl">{tempData.licenseRestrictions}</div>
-          </div>
-          <div className="grid gap-2">
-            <div className="text-11xl font-bold">Additional Comments</div>
-            <div className="text-11xl">{tempData.comments}</div>
-          </div>
+        <div className="text-11xl">
+          <span className="font-bold">Organization: </span>
+          {formData.organization}
+        </div>
+        <div className="text-11xl">
+          <span className="font-bold">License Type: </span>
+          {formData.licenseType}
+        </div>
+        <div className="text-11xl">
+          <span className="font-bold">Valid Upto: </span>
+          {formData.endDate}
+        </div>
+        <div className="text-11xl">
+          <span className="font-bold">License Duration: </span>
+          {formData.noOfDays}
+        </div>
+        <div>
+          <Button
+            className="cursor-pointer"
+            sx={{ width: 330 }}
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              navigate("/selected-modules");
+            }}
+          >{`Selected Modules ->`}</Button>
+        </div>
+        <div className="grid gap-2">
+          <div className="text-11xl font-bold">License date Restrictions </div>
+          <div className="text-11xl">{formData.licenseRestrictionsDate}</div>
+        </div>
+        <div className="grid gap-2">
+          <div className="text-11xl font-bold">Additional Comments</div>
+          <div className="text-11xl">{formData.comments}</div>
         </div>
       </div>
+      {/* </div> */}
 
       <div
         className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-limegreen m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         onClick={handleDownload}
       >
-        <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Generate License  ->`}</div>
+        <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Download File ->`}</div>
       </div>
-
-      {/* 
-      <div className="absolute top-[381px] left-[calc(50%_-_569px)] w-[1102px] h-[453px] overflow-y-auto text-left text-9xl text-whitesmoke-100">
-        <div className="absolute top-[15px] left-[9px] flex items-center w-[466px] h-[38px]">
-          Organization: {tempData.organization}
-        </div>
-        <div className="absolute top-[129px] left-[9px] flex items-center w-[466px] h-[38px]">
-          License Duration: {tempData.noOfDays}
-        </div>
-        <div className="absolute top-[186px] left-[9px] flex items-center w-[466px] h-[38px]">
-          Valid Upto: {tempData.endDate}
-        </div>
-        <div className="absolute top-[72px] left-[9px] flex items-center w-[466px] h-[38px]">
-          License Type: {tempData.licenseType}
-        </div>
-        <Link
-          className="cursor-pointer [text-decoration:none] absolute top-[125px] left-[0px] w-[341px] h-[62px] text-center text-white"
-          to="/selected-modules"
-        >
-          <div className="absolute top-[0px] left-[0px] rounded-xl bg-dimgray-200 w-[341px] h-[62px]" />
-          <div className="absolute top-[5.89px] left-[31.56px] flex items-center justify-center w-[278.35px] h-[50.47px]">
-            View Selected Modules
-          </div>
-        </Link>
-        <div
-          className="absolute top-[20px] left-[192px] bg-salmon-200 w-56 h-[29px]"
-          id="organizationName"
-        />
-        <div
-          className="absolute top-[77px] left-[194px] bg-salmon-200 w-[241px] h-7"
-          id="lcenseTypeDiv"
-        />
-        <div
-          className="absolute top-[135px] left-[247px] bg-salmon-200 w-[191px] h-8"
-          id="licenseDurationDi\v"
-        />
-        <div
-          className="absolute top-[190px] left-[162px] bg-salmon-200 w-[285px] h-[30px]"
-          id="validityDiv"
-        />
-        <div className="absolute top-[322px] left-[19px] w-[1083px] h-[101px] text-11xl">
-          <div className="absolute top-[0px] left-[0px] inline-block w-[1023px] h-12">
-            <p className="m-0">
-              <b>License Restrictions</b>
-              {tempData.licenseRestrictions}
-            </p>
-            <p className="m-0 text-6xl">&nbsp;</p>
-          </div>
-          <div
-            className="absolute top-[55px] left-[0px] bg-salmon-200 w-[1083px] h-[46px]"
-            id="licenseRestrictionDiv"
-          />
-        </div>
-        <div className="absolute top-[453px] left-[19px] w-[1083px] h-[101px] text-11xl">
-          <div className="absolute top-[0px] left-[0px] inline-block w-[1023px] h-12">
-            <p className="m-0">
-              <b>Additional Comments</b>
-              {tempData.comments}
-            </p>
-            <p className="m-0 text-6xl">&nbsp;</p>
-          </div>
-          <div
-            className="absolute top-[55px] left-[0px] bg-salmon-200 w-[1083px] h-[46px]"
-            id="licenseRestrictionDiv"
-          />
-        </div>
-      </div> */}
-      {/* <div className="absolute top-[278px] left-[calc(50%_-_570px)] box-border w-[1103px] h-[103px] overflow-hidden border-[1px] border-solid border-black">
-        <div
-          className="absolute top-[6px] left-[20px] bg-gainsboro-200 w-[378px] h-[84px]"
-          id="customerNameDiv"
-        >
-          <p>User Name: {tempData.name}</p>
-        </div>
-        <div
-          className="absolute top-[23px] left-[809px] bg-gainsboro-200 w-[274px] h-[29px]"
-          id="customerEmail"
-        />
-        <div
-          className="absolute top-[61px] left-[809px] bg-gainsboro-200 w-[274px] h-[29px]"
-          id="customerPhone"
-        />
-      </div> */}
     </div>
   );
 };
