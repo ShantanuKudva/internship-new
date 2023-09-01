@@ -25,6 +25,14 @@ body {
   /* @apply w-[1440px]; */
 }
 
+.nav-container-2 {
+  @apply bg-peachpuff flex flex-col p-10 text-center font-hp-simplified-jpan h-28;
+
+  /* @apply overflow-hidden flex flex-col py-[38px] px-24 box-border items-end justify-end text-center text-21xl text-black font-hp-simplified-jpan; */
+  /* @apply flex bg-peachpuff p-5 justify-center text-center */
+  /* @apply w-[1440px]; */
+}
+
 .circle {
   @apply grid place-items-center top-[0px] left-[0px] rounded-[50%] bg-white shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[82px] h-[83px];
 }
@@ -69,3 +77,70 @@ body {
 }
 
 /* /page 2 / */
+/* styles.css */
+
+/* Apply a border to the entire table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Style for table headers */
+th {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Style for table cells */
+td {
+  border: 1px solid black;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Additional styles for pagination and search input */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.search-input {
+  border: 2px solid black;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.module-column {
+  width: 25rem;
+  padding-left: 1rem;
+}
+
+.checkbox-column {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.search {
+  border-color: tomato;
+  border-width: 0.5rem;
+}
+
+.bold-header {
+  @apply font-extrabold text-6xl
+  /* Add more custom styles here... */;
+}
+
+.MuiDataGrid-checkboxInput.Mui-checked,
+.MuiButton-textPrimary {
+  color: tomato;
+}
+
+.MuiDataGrid-overlayWrapper {
+  height: 100px;
+}

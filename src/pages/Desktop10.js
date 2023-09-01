@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import data from "./data.json";
+import data from "./newData.json";
+import { TbArrowBackUp } from "react-icons/tb";
 
-const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
+const Desktop10 = ({
+  formData,
+  setFormData,
+  activeLink,
+  setActiveLink,
+  setIds,
+  ids,
+}) => {
   const navigate = useNavigate();
   const handleNextButtonSubmit = () => {
     if (activeLink === null) {
@@ -13,16 +21,18 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           ...formData,
           licenseType: "Demo",
           noOfDays: 7,
-          moduleSelected: Object.keys(data),
+          moduleSelected: data.map((row) => row.module),
         });
+        setIds([]);
       }
       if (activeLink === "trial") {
         setFormData({
           ...formData,
           licenseType: "Trial",
           noOfDays: 30,
-          moduleSelected: Object.keys(data),
+          moduleSelected: data.map((row) => row.module),
         });
+        setIds([]);
       }
       if (activeLink === "perpetual") {
         setFormData({
@@ -31,6 +41,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           noOfDays: 1,
           moduleSelected: [],
         });
+        setIds([]);
       }
       if (activeLink === "production") {
         setFormData({
@@ -39,6 +50,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           noOfDays: 1,
           moduleSelected: [],
         });
+        setIds([]);
       }
 
       navigate("/license-details");
@@ -55,20 +67,24 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           licenseType: "Demo",
           noOfDays: 7,
         });
+        setIds([]);
       } else if (activeLink === "trial") {
         setFormData({ ...formData, licenseType: "Trial", noOfDays: 30 });
+        setIds([]);
       } else if (activeLink === "perpetual") {
         setFormData({
           ...formData,
           licenseType: "Perpetual",
           noOfDays: 1,
         });
+        setIds([]);
       } else if (activeLink === "production") {
         setFormData({
           ...formData,
           licenseType: "Production",
           noOfDays: 1,
         });
+        setIds([]);
       }
 
       navigate("/license-details");
@@ -85,20 +101,24 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           licenseType: "Demo",
           noOfDays: 7,
         });
+        setIds([]);
       } else if (activeLink === "trial") {
         setFormData({ ...formData, licenseType: "Trial", noOfDays: 30 });
+        setIds([]);
       } else if (activeLink === "perpetual") {
         setFormData({
           ...formData,
           licenseType: "Perpetual",
           noOfDays: 1,
         });
+        setIds([]);
       } else if (activeLink === "production") {
         setFormData({
           ...formData,
           licenseType: "Production",
           noOfDays: 1,
         });
+        setIds([]);
       }
 
       navigate("/preview");
@@ -115,6 +135,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           licenseType: "Demo",
           noOfDays: 7,
         });
+        setIds([]);
       } else if (activeLink === "trial") {
         setFormData({ ...formData, licenseType: "Trial", noOfDays: 30 });
       } else if (activeLink === "perpetual") {
@@ -123,12 +144,14 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           licenseType: "Perpetual",
           noOfDays: 1,
         });
+        setIds([]);
       } else if (activeLink === "production") {
         setFormData({
           ...formData,
           licenseType: "Production",
           noOfDays: 1,
         });
+        setIds([]);
       }
 
       navigate("/customer-info");
@@ -139,6 +162,18 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
     <div className="desktop-9-resp">
       <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
+          <div
+            id="nextPageLink"
+            onClick={() => navigate("/")}
+            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
+          >
+            {
+              <TbArrowBackUp
+                style={{ transform: "scale(1.5)", color: "tomato" }}
+              />
+            }
+            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
+          </div>
           <div className="absolute left-[8rem]">
             <div
               className="cursor-pointer circle [text-decoration:none]"
@@ -163,7 +198,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
 
             <div className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[384px] w-[82px] h-[83px] text-tomato">
               <div className="red circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">2</div>
+                <div className="text-white ml-[-2rem] mt-[0.6rem]">2</div>
                 <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                   License Type
                 </div>
@@ -310,7 +345,7 @@ const Desktop10 = ({ formData, setFormData, activeLink, setActiveLink }) => {
           onClick={handleNextButtonSubmit}
           className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         >
-          <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step  ->`}</div>
+          <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
         </button>
       </div>
     </div>

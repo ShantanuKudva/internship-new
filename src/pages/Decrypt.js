@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router";
+import { TbArrowBackUp } from "react-icons/tb";
 
 import axios from "axios";
 const API_BASE = "http://localhost:3002";
@@ -30,17 +31,22 @@ const Decrypt = () => {
 
   return (
     <div className="">
-      <div className="bg-tomato h-[120px]">
-        <Button
-          className="cursor-pointer my-10 mx-10"
-          sx={{ width: 330 }}
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            navigate("/");
-          }}
-        >{` <- Go to Home`}</Button>
-      </div>
+      <nav className="nav-container-2" id="navContainer">
+        <div className="nav-items relative">
+          <div
+            id="nextPageLink"
+            onClick={() => navigate("/")}
+            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-[0.1rem] bg-none"
+          >
+            {
+              <TbArrowBackUp
+                style={{ transform: "scale(6)", color: "tomato" }}
+              />
+            }
+            <div className="bg-none text-xl mt-3">Home</div>
+          </div>
+        </div>
+      </nav>
       <div className="font-bold text-21xl my-10 mx-10">
         Decrypt your License Key
       </div>

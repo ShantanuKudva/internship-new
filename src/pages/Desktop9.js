@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { TbArrowBackUp } from "react-icons/tb";
 
 const Desktop9 = ({
   formData,
@@ -109,12 +110,24 @@ const Desktop9 = ({
   };
   return (
     <div className=" desktop-9-resp">
-      <nav className="nav-container" id="navContainer">
+      {/* <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
-          {/* circle 1 */}
+          <div
+            id="nextPageLink"
+            onClick={() => navigate("/")}
+            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
+          >
+            {
+              <TbArrowBackUp
+                style={{ transform: "scale(1.5)", color: "tomato" }}
+              />
+            }
+            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
+          </div>
+      =
           <div className="absolute left-[9rem]">
             <div className="red circle">
-              <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
+              <div className="text-white ml-[-2rem] mt-[0.6rem]">1</div>
               <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                 Customer Info
               </div>
@@ -170,7 +183,82 @@ const Desktop9 = ({
             />
           </div>
         </div>
+      </nav> */}
+
+      <nav className="nav-container" id="navContainer">
+        <div className="nav-items relative">
+          <div
+            id="nextPageLink"
+            onClick={() => navigate("/")}
+            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
+          >
+            {
+              <TbArrowBackUp
+                style={{ transform: "scale(1.5)", color: "tomato" }}
+              />
+            }
+            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
+          </div>
+          <div
+            className="absolute left-[8rem]"
+            onClick={handlePage2ButtonSubmit}
+          >
+            <div className="cursor-pointer circle red [text-decoration:none]">
+              <div className="text-white ml-[-2rem] mt-[0.6rem]">1</div>
+              <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
+                Customer Info
+              </div>
+            </div>
+            <div
+              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[752px] w-[82px] h-[83px] text-tomato"
+              onClick={handlePage3ButtonSubmit}
+            >
+              <div className="circle">
+                <div className="text-black ml-[-2rem] mt-[0.6rem]">3</div>
+                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
+                  License Details
+                </div>
+              </div>
+            </div>
+
+            <div className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[384px] w-[82px] h-[83px] text-tomato">
+              <div className=" circle">
+                <div className="text-black ml-[-2rem] mt-[0.6rem]">2</div>
+                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
+                  License Type
+                </div>
+              </div>
+            </div>
+            <div
+              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[1119px] w-[82px] h-[83px] text-tomato"
+              onClick={handlePage4ButtonSubmit}
+            >
+              <div className="circle">
+                <div className="text-black ml-[-2rem] mt-[0.6rem]">4</div>
+                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
+                  Preview
+                </div>
+              </div>
+            </div>
+            <img
+              className="absolute top-[40.5px] left-[138px] w-[220px] h-[3px]"
+              alt=""
+              src="/line-11.svg"
+            />
+            <img
+              className="absolute top-[40.5px] left-[499px] w-[220px] h-[3px]"
+              alt=""
+              src="/line-11.svg"
+            />
+            <img
+              className="absolute top-[40.5px] left-[866px] w-[220px] h-[3px]"
+              alt=""
+              src="/line-11.svg"
+            />
+          </div>
+        </div>
       </nav>
+
       <div className=" page-one-items">
         <p className=" font-bold " id="pageOneHeading">
           Customer Info:
@@ -286,7 +374,7 @@ const Desktop9 = ({
           onClick={handleNextButtonSubmit}
           className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         >
-          <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step  ->`}</div>
+          <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
         </button>
       </div>
     </div>
