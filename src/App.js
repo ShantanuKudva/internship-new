@@ -15,6 +15,8 @@ import Decrypt from "./pages/Decrypt.js";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import "./";
+import TableComponent from "./pages/TableComponent.js";
+import History from "./pages/History.js";
 
 function App() {
   const action = useNavigationType();
@@ -33,6 +35,13 @@ function App() {
     name1: "empty",
   });
 
+  const [restrictions, setRestrictions] = useState({
+    date: "empty",
+    time: "empty",
+  });
+
+  const [ids, setIds] = useState([]);
+
   const [activeLink, setActiveLink] = useState(null);
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -45,7 +54,8 @@ function App() {
     endDate: "",
     noOfDays: 1,
     moduleSelected: [],
-    licenseRestrictions: "",
+    licenseRestrictionsDate: "",
+    licenseRestrictionsTime: "",
     comments: "",
   });
 
@@ -118,12 +128,21 @@ function App() {
             setFormData={setFormData}
             activeLink={activeLink}
             setActiveLink={setActiveLink}
+            ids={ids}
+            setIds={setIds}
           />
         }
       />
       <Route
         path="/license-details"
-        element={<Desktop11 formData={formData} setFormData={setFormData} />}
+        element={
+          <Desktop11
+            formData={formData}
+            setFormData={setFormData}
+            restrictions={restrictions}
+            setRestrictions={setRestrictions}
+          />
+        }
       />
       <Route
         path="/preview"
@@ -131,13 +150,23 @@ function App() {
       />
       <Route
         path="/selected-modules"
-        element={<Desktop15 formData={formData} setFormData={setFormData} />}
+        element={
+          <Desktop15 formData={formData} setFormData={setFormData} ids={ids} />
+        }
       />
       <Route
         path="/module-selector"
-        element={<Desktop14 formData={formData} setFormData={setFormData} />}
+        element={
+          <Desktop14
+            formData={formData}
+            setFormData={setFormData}
+            ids={ids}
+            setIds={setIds}
+          />
+        }
       />
       <Route path="/decrypt" element={<Decrypt />} />
+      <Route path="/history" element={<History />} />
     </Routes>
   );
 }

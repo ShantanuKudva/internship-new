@@ -71,3 +71,9 @@ app.post("/api/licenses", async (req, res) => {
       .json({ error: "An error occurred while saving the license" });
   }
 });
+
+app.get("/history", async (req, res) => {
+  //find the list and store it as json
+  const history = await License.find();
+  res.json(history);
+});

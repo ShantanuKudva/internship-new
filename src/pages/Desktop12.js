@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { TbArrowBackUp } from "react-icons/tb";
 // import License from "../api/models/License.js";
 
 const API_BASE = "http://localhost:3002";
@@ -150,20 +151,32 @@ const Desktop12 = ({ formData, setFormData }) => {
   };
 
   const navigate = useNavigate();
-  useEffect(() => {
-    fetch("http://localhost:3001/posts")
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        setTempData(data[data.length - 1]);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/posts")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log(data);
+  //       setTempData(data[data.length - 1]);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
 
   return (
     <div className="desktop-9-resp">
       <nav className="nav-container" id="navContainer">
         <div className="nav-items relative">
+          <div
+            id="nextPageLink"
+            onClick={() => navigate("/")}
+            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
+          >
+            {
+              <TbArrowBackUp
+                style={{ transform: "scale(1.5)", color: "tomato" }}
+              />
+            }
+            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
+          </div>
           <div className="absolute left-[8rem]">
             <Link className="circle [text-decoration:none]" to="/customer-info">
               <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
@@ -199,7 +212,7 @@ const Desktop12 = ({ formData, setFormData }) => {
               to="/preview"
             >
               <div className="red circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">4</div>
+                <div className="text-white ml-[-2rem] mt-[0.6rem]">4</div>
                 <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
                   Preview
                 </div>
@@ -223,6 +236,7 @@ const Desktop12 = ({ formData, setFormData }) => {
           </div>
         </div>
       </nav>
+
       {/* the preview wasnt showing the current details as we used temData to access
       things rather than using formData */}
       {/* <div className="bg-salmon-100 h-[30rem] w-[60%] m-auto rounded-2xl mt-10 text-white py-10 overflow-y-scroll"> */}
@@ -252,7 +266,7 @@ const Desktop12 = ({ formData, setFormData }) => {
         </div>
         <div className="text-11xl">
           <span className="font-bold">Valid Upto: </span>
-          {formData.endDate}
+          {formData.endDate !== "" ? formData.endDate : "None"}
         </div>
         <div className="text-11xl">
           <span className="font-bold">License Duration: </span>
@@ -260,14 +274,14 @@ const Desktop12 = ({ formData, setFormData }) => {
         </div>
         <div>
           <Button
-            className="cursor-pointer"
-            sx={{ width: 330 }}
+            className="cursor-pointer bg-tomato text-white rounded-xl"
+            sx={{ width: 400, height: 50 }}
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={() => {
               navigate("/selected-modules");
             }}
-          >{`Selected Modules ->`}</Button>
+          >{`Selected Modules`}</Button>
         </div>
         <div className="grid gap-2">
           <div className="text-11xl font-bold">License date Restrictions </div>
@@ -284,7 +298,7 @@ const Desktop12 = ({ formData, setFormData }) => {
         className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-limegreen m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         onClick={handleDownload}
       >
-        <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Download File ->`}</div>
+        <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Download File`}</div>
       </div>
     </div>
   );
