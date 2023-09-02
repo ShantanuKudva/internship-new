@@ -136,7 +136,7 @@ const Desktop15 = ({ formData }) => {
     // Push the updated objects
   }, []);
 
-  console.log(selectedModulesWithIds);
+  // console.log(selectedModulesWithIds);
 
   return (
     <div className="desktop-9-resp">
@@ -151,7 +151,7 @@ const Desktop15 = ({ formData }) => {
           Go Back
         </Button>
       </div>
-      <div className="w-[50%] m-auto">
+      <div className="table">
         <DataGrid
           rows={selectedModulesWithIds}
           columns={columns}
