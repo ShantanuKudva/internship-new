@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "@mui/material";
 const API_BASE = "http://localhost:3002";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useNavigate } from "react-router";
 import { TbArrowBackUp } from "react-icons/tb";
+import FileSaver from "file-saver"; // Import the FileSaver library
 
 export default function History() {
   const navigate = useNavigate();
@@ -42,10 +44,42 @@ export default function History() {
     {
       field: "encryptedLicense",
       headerName: "Encrypted License",
-      width: 600,
+      width: 400,
       headerClassName: "bold-header",
     },
+    {
+      field: "download",
+      headerName: "Download File",
+      width: 200,
+      sortable: false,
+      headerClassName: "bold-header",
+      filterable: false,
+      renderCell: (params) => (
+        // <Button
+        //   color="secondary"
+        //   className="bg-tomato text-white"
+        //   onClick={() => handleDownloadClick(params.row)}
+        // >
+        //   Download
+        // </Button>
+        <Button
+          // sx={{ height:  }}
+          className="cursor-pointer bg-tomato text-white m-10 "
+          variant="contained"
+          color="secondary"
+          onClick={() => handleDownloadClick(params.row)}
+        >
+          Download
+        </Button>
+      ),
+    },
   ];
+
+  const handleDownloadClick = (rowData) => {
+    const jsonData = JSON.stringify(rowData);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    FileSaver.saveAs(blob, `data_${rowData._id}.json`);
+  };
   return (
     <>
       <nav className="nav-container-2" id="navContainer">

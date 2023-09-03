@@ -66,7 +66,10 @@ function Navbar({
   };
   return (
     <nav className="nav-container" id="navContainer">
-      <div className="nav-items flex items-center justify-around gap-2">
+      <div
+        className="nav-items flex items-center justify-around gap-2"
+        style={{ backgroundColor: "#F6E8DD" }}
+      >
         <div className="ml-8">
           <div className="wizard-step">
             <div className="circle red flex items-center justify-center m-auto">
