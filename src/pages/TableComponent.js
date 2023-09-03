@@ -786,7 +786,7 @@ export default function TableComponent({ formData, setFormData, ids, setIds }) {
     {
       field: "module",
       headerName: "Module",
-      width: 600,
+      width: 400,
       headerClassName: "bold-header",
     },
   ];
@@ -828,7 +828,7 @@ export default function TableComponent({ formData, setFormData, ids, setIds }) {
   // console.log("Render - Selected IDs:", ids);
 
   return (
-    <div className="w-[50%] m-auto">
+    <div className="table">
       <DataGrid
         rows={rows}
         columns={columns}

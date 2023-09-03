@@ -5,6 +5,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home.js";
+import Layout from "./pages/Layout.js";
 import Desktop10 from "./pages/Desktop10";
 import Desktop9 from "./pages/Desktop9";
 import Desktop12 from "./pages/Desktop12";
@@ -106,9 +107,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      {/* <Route path="/" element={<Home />} /> */}
       <Route
-        path="/customer-info"
+        path="/"
         element={
           <Desktop9
             formData={formData}

@@ -27,8 +27,6 @@ const Decrypt = () => {
     }
   };
 
-  console.log(typeof decryptedData);
-
   return (
     <div className="">
       <nav className="nav-container-2" id="navContainer">
