@@ -144,159 +144,52 @@ const Desktop9 = ({
 
   // Function to handle button clicks and navigate to different pages
   return (
-    <div className=" desktop-9-resp">
-      {/* <nav className="nav-container" id="navContainer">
-        <div className="nav-items relative">
-          <div
-            id="nextPageLink"
-            onClick={() => navigate("/")}
-            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
-          >
-            {
-              <TbArrowBackUp
-                style={{ transform: "scale(1.5)", color: "tomato" }}
-              />
-            }
-            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
-          </div>
-      =
-          <div className="absolute left-[9rem]">
-            <div className="red circle">
-              <div className="text-white ml-[-2rem] mt-[0.6rem]">1</div>
-              <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                Customer Info
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[752px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage3ButtonSubmit}
+    <div className=" desktop-9-resp flex relative">
+      <div className="w-2/12 fixed">
+        <div className="left-div">
+          <div className=" grid h-[100vh]">
+            <Button
+              // sx={{ height: 100 }}
+              className="cursor-pointer bg-tomato text-white border-black border-4 relative"
+              variant="contained"
+              color="secondary"
+              onClick={() => handlePageChange("/history")}
             >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">3</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Details
-                </div>
-              </div>
-            </div>
+              <div className="text-5xl">History</div>
+              {/* Add a black bar before this button */}
+            </Button>
 
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[384px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage2ButtonSubmit}
+            <Button
+              // sx={{ height: 100 }}
+              onClick={() => handlePageChange("/decrypt")}
+              className="cursor-pointer bg-tomato text-white relative"
+              variant="contained"
+              color="secondary"
             >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">2</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Type
-                </div>
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[1119px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage4ButtonSubmit}
+              <div className="text-5xl">Decrypt</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
+
+            <Button
+              // sx={{ height: 100 }}
+              // onClick={() => handlePageChange("/")}
+              className="cursor-pointer bg-white text-tomato relative hover:bg-white"
+              variant="contained"
+              color="secondary"
             >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">4</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  Preview
-                </div>
-              </div>
-            </div>
-            <img
-              className="absolute top-[40.5px] left-[138px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[499px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[866px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
+              <div className="text-5xl">Home</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
           </div>
         </div>
-      </nav> */}
+      </div>
 
-      {/* <nav className="nav-container" id="navContainer">
-        <div className="nav-items relative">
-          <div
-            id="nextPageLink"
-            onClick={() => navigate("/")}
-            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
-          >
-            {
-              <TbArrowBackUp
-                style={{ transform: "scale(1.5)", color: "tomato" }}
-              />
-            }
-            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
-          </div>
-          <div
-            className="absolute left-[8rem]"
-            onClick={handlePage2ButtonSubmit}
-          >
-            <div className="cursor-pointer circle red [text-decoration:none]">
-              <div className="text-white ml-[-2rem] mt-[0.6rem]">1</div>
-              <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                Customer Info
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[752px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage3ButtonSubmit}
-            >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">3</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Details
-                </div>
-              </div>
-            </div>
-
-            <div className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[384px] w-[82px] h-[83px] text-tomato">
-              <div className=" circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">2</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Type
-                </div>
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[1119px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage4ButtonSubmit}
-            >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">4</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  Preview
-                </div>
-              </div>
-            </div>
-            <img
-              className="absolute top-[40.5px] left-[138px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[499px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[866px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-          </div>
-        </div>
-      </nav> */}
-
-      <nav className="nav-container" id="navContainer">
-        <div className="nav-items flex items-center justify-around gap-2">
-          {/* <div
+      <div className="w-10/12 ml-[16.6%]">
+        <nav className="nav-container" id="navContainer">
+          <div className="nav-items flex items-center justify-around gap-2">
+            {/* <div
             id="nextPageLink"
             onClick={() => navigate("/")}
             className="cursor-pointer grid items-center"
@@ -306,203 +199,170 @@ const Desktop9 = ({
             />
             <div className="text-xl ml-2 text-black mt-2">Home</div>
           </div> */}
-          <div className="ml-8">
-            <div className="wizard-step">
-              <div className="circle red flex items-center justify-center m-auto">
-                <div className="text-white">1</div>
+            <div className="ml-8">
+              <div className="wizard-step">
+                <div className="circle red flex items-center justify-center m-auto">
+                  <div className="text-white">1</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  Customer Info
+                </div>
               </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                Customer Info
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8" onClick={handlePage2ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle flex items-center justify-center m-auto">
+                  <div className="text-black">2</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  License Type
+                </div>
+              </div>
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8" onClick={handlePage3ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle flex items-center justify-center m-auto">
+                  <div className="text-black ">3</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  License Details
+                </div>
+              </div>
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8" onClick={handlePage4ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle flex items-center justify-center">
+                  <div className="text-black">4</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 ">
+                  Preview
+                </div>
               </div>
             </div>
           </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8" onClick={handlePage2ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle flex items-center justify-center m-auto">
-                <div className="text-black">2</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                License Type
-              </div>
-            </div>
-          </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8" onClick={handlePage3ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle flex items-center justify-center m-auto">
-                <div className="text-black ">3</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                License Details
-              </div>
-            </div>
-          </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8" onClick={handlePage4ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle flex items-center justify-center">
-                <div className="text-black">4</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 ">
-                Preview
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+        </nav>
 
-      <div className="main-div">
-        <div className="left-div" style={{ backgroundColor: "#F6E8DD" }}>
-          <div className=" grid gap-2">
-            <Button
-              sx={{ height: 100 }}
-              className="cursor-pointer bg-tomato text-white m-10 "
-              variant="contained"
-              color="secondary"
-              onClick={() => handlePageChange("/history")}
+        <div className="main-div">
+          <div className=" page-one-items right-div">
+            <p className=" font-bold " id="pageOneHeading">
+              Customer Info:
+            </p>
+            <p
+              className="m-0 relative text-6xl font-medium text-dimgray-100 inline-block w-[299px]"
+              id="pageOneSubHeading"
             >
-              History
-            </Button>
-            <div className="h-[10rem] w-[2px] bg-black m-auto"></div>
-            <Button
-              sx={{ height: 100 }}
-              onClick={() => handlePageChange("/decrypt")}
-              className="cursor-pointer bg-tomato text-white m-10"
-              variant="contained"
-              color="secondary"
+              Let us get to know you!
+            </p>
+            <p
+              className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
+              id="nameLabel"
             >
-              Decrypt
-            </Button>
-            <div className="h-[10rem] w-[2px] bg-black m-auto"></div>
-            <Button
-              sx={{ height: 100 }}
-              onClick={() => handlePageChange("/")}
-              className="cursor-pointer bg-tomato text-white m-10"
-              variant="contained"
+              Name
+            </p>
+            <TextField
+              className="page1-textbox"
               color="secondary"
+              id="nameInput"
+              placeholder="Enter your Name"
+              size="medium"
+              margin="none"
+              required
+              value={formData.name}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+              }}
+              onBlur={handleNameBlur}
+              error={!!formErrors.name1}
+              helperText={formErrors.name1}
+            />
+            <p
+              className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
+              id="emailLabel"
             >
-              Home
-            </Button>
+              Email
+            </p>
+            <TextField
+              className="page1-textbox"
+              // sx={{ width: 724 }}
+              color="secondary"
+              variant="outlined"
+              type="email"
+              id="emailInput"
+              required
+              value={formData.email}
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+              }}
+              placeholder="Enter your Email"
+              size="medium"
+              margin="none"
+              onBlur={handleEmailBlur}
+              error={!!formErrors.email}
+              helperText={formErrors.email}
+            />
+
+            <p
+              className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
+              id="contactLabel"
+            >
+              Contact Number
+            </p>
+            <TextField
+              className="page1-textbox"
+              // sx={{ width: 724 }}
+              color="secondary"
+              variant="outlined"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => {
+                setFormData({ ...formData, phone: e.target.value });
+              }}
+              onBlur={handlePhoneNumberBlur}
+              error={!!formErrors.phone}
+              helperText={formErrors.phone}
+              id="phoneInput"
+              placeholder="Enter your Phone Number"
+              size="medium"
+              margin="none"
+              required
+            />
+            <p
+              className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
+              id="orgsLabel"
+            >
+              Organization
+            </p>
+            <TextField
+              className="page1-textbox"
+              // sx={{ width: 724 }}
+              color="secondary"
+              variant="outlined"
+              type="text"
+              id="orgsInput"
+              placeholder="Enter Organization Name"
+              size="medium"
+              value={formData.organization}
+              onChange={(e) => {
+                setFormData({ ...formData, organization: e.target.value });
+              }}
+              onBlur={handleOrgsBlur}
+              error={!!formErrors.orgs}
+              helperText={formErrors.orgs}
+              margin="none"
+              required
+            />
+
+            <button
+              id="nextPageLink"
+              onClick={handleNextButtonSubmit}
+              className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
+            >
+              <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
+            </button>
           </div>
-        </div>
-
-        <div className=" page-one-items right-div">
-          <p className=" font-bold " id="pageOneHeading">
-            Customer Info:
-          </p>
-          <p
-            className="m-0 relative text-6xl font-medium text-dimgray-100 inline-block w-[299px]"
-            id="pageOneSubHeading"
-          >
-            Let us get to know you!
-          </p>
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
-            id="nameLabel"
-          >
-            Name
-          </p>
-          <TextField
-            className="page1-textbox"
-            color="secondary"
-            id="nameInput"
-            placeholder="Enter your Name"
-            size="medium"
-            margin="none"
-            required
-            value={formData.name}
-            onChange={(e) => {
-              setFormData({ ...formData, name: e.target.value });
-            }}
-            onBlur={handleNameBlur}
-            error={!!formErrors.name1}
-            helperText={formErrors.name1}
-          />
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
-            id="emailLabel"
-          >
-            Email
-          </p>
-          <TextField
-            className="page1-textbox"
-            // sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="email"
-            id="emailInput"
-            required
-            value={formData.email}
-            onChange={(e) => {
-              setFormData({ ...formData, email: e.target.value });
-            }}
-            placeholder="Enter your Email"
-            size="medium"
-            margin="none"
-            onBlur={handleEmailBlur}
-            error={!!formErrors.email}
-            helperText={formErrors.email}
-          />
-
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
-            id="contactLabel"
-          >
-            Contact Number
-          </p>
-          <TextField
-            className="page1-textbox"
-            // sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => {
-              setFormData({ ...formData, phone: e.target.value });
-            }}
-            onBlur={handlePhoneNumberBlur}
-            error={!!formErrors.phone}
-            helperText={formErrors.phone}
-            id="phoneInput"
-            placeholder="Enter your Phone Number"
-            size="medium"
-            margin="none"
-            required
-          />
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
-            id="orgsLabel"
-          >
-            Organization
-          </p>
-          <TextField
-            className="page1-textbox"
-            // sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="text"
-            id="orgsInput"
-            placeholder="Enter Organization Name"
-            size="medium"
-            value={formData.organization}
-            onChange={(e) => {
-              setFormData({ ...formData, organization: e.target.value });
-            }}
-            onBlur={handleOrgsBlur}
-            error={!!formErrors.orgs}
-            helperText={formErrors.orgs}
-            margin="none"
-            required
-          />
-
-          <button
-            id="nextPageLink"
-            onClick={handleNextButtonSubmit}
-            className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
-          >
-            <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
-          </button>
         </div>
       </div>
     </div>

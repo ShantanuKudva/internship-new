@@ -153,6 +153,23 @@ const Desktop15 = ({ formData }) => {
       </div>
       <div className="table">
         <DataGrid
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "2px solid tomato", // Tomato-colored border for the entire DataGrid
+            },
+            "& .MuiDataGrid-cell": {
+              border: "2px solid tomato", // Tomato-colored border for individual cells
+              borderRight: "none", // Remove right border for cells
+              borderTop: "none", // Remove top border for cells
+              // Add more CSS for customization as needed
+            },
+            "& .MuiDataGrid-columnHeader": {
+              border: "2px solid tomato", // Tomato-colored border for individual cells
+              borderRight: "none", // Remove right border for cells
+              borderTop: "none", // Remove top border for cells
+              // Add more CSS for customization as needed
+            },
+          }}
           rows={selectedModulesWithIds}
           columns={columns}
           rowHeight={50}
