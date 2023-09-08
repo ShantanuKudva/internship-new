@@ -269,42 +269,34 @@ const Desktop10 = ({
                 <div className="circle  flex items-center justify-center m-auto">
                   <div className="text-black">1</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  Customer Info
-                </div>
+                <div className="nav-text">Customer Info</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8">
               <div className="wizard-step">
                 <div className="circle red flex items-center justify-center m-auto">
                   <div className="text-white">2</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  License Type
-                </div>
+                <div className="nav-text">License Type</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8" onClick={handlePage3ButtonSubmit}>
               <div className="wizard-step">
                 <div className="circle flex items-center justify-center m-auto">
                   <div className="text-black ">3</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  License Details
-                </div>
+                <div className="nav-text">License Details</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8" onClick={handlePage4ButtonSubmit}>
               <div className="wizard-step">
-                <div className="circle flex items-center justify-center">
+                <div className="circle flex items-center justify-center m-auto">
                   <div className="text-black">4</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 ">
-                  Preview
-                </div>
+                <div className="nav-text ">Preview</div>
               </div>
             </div>
           </div>

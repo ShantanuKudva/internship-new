@@ -10,6 +10,15 @@ const Desktop11 = ({
   restrictions,
   setRestrictions,
 }) => {
+  const [disabled, setDisabled] = useState("");
+  const handleDisabledBlur = () => {
+    if (formData.licenseType === "Demo" || formData.licenseType === "Trial") {
+      setDisabled("disabled");
+      console.log(formData.licenseType);
+    } else {
+      setdisabled("");
+    }
+  };
   const navigate = useNavigate();
   const handleDateBlur = () => {
     if (!formData.licenseRestrictionsDate) {
@@ -64,6 +73,29 @@ const Desktop11 = ({
       endDate: endDateObject.toISOString().substring(0, 10),
     });
   };
+
+  // const errors = () => {
+
+  //   //else {
+  //   //   setDisabled("");
+  //   //   console.log(disabled);
+  //   // }
+
+  const errors = () => {
+    if (formData.licenseType === "demo" || formData.licenseType === "trial") {
+      setDisabled(
+        `This field is disabled as you have selected the ${formData.licenseType} License Type`
+      );
+    } else {
+      setDisabled(""); // Reset the disabled message if not "demo" or "trial"
+    }
+  };
+
+  // Log the disabled value after it's updated
+  // useEffect(() => {
+  //   console.log(disabled);
+  // }, [disabled]);
+
   // const handleSubmit = (e) => {
   //   // console.log(formData.name)
   //   fetch("http://localhost:3001/posts", {
@@ -174,42 +206,34 @@ const Desktop11 = ({
                 <div className="circle  flex items-center justify-center m-auto">
                   <div className="text-black">1</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  Customer Info
-                </div>
+                <div className="nav-text">Customer Info</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8" onClick={() => navigate("/license-type")}>
               <div className="wizard-step">
                 <div className="circle flex items-center justify-center m-auto">
                   <div className="text-black">2</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  License Type
-                </div>
+                <div className="nav-text">License Type</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8">
               <div className="wizard-step">
                 <div className="circle red flex items-center justify-center m-auto">
                   <div className="text-white ">3</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                  License Details
-                </div>
+                <div className="nav-text">License Details</div>
               </div>
             </div>
-            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="lines"></div>
             <div className="ml-8" onClick={handleSubmit}>
               <div className="wizard-step">
-                <div className="circle flex items-center justify-center">
+                <div className="circle flex items-center justify-center m-auto">
                   <div className="text-black">4</div>
                 </div>
-                <div className="text-center text-xl text-black mt-2 ">
-                  Preview
-                </div>
+                <div className="nav-text">Preview</div>
               </div>
             </div>
           </div>
@@ -226,9 +250,12 @@ const Desktop11 = ({
                   </div>
                   {formData.licenseType === "Demo" ||
                   formData.licenseType === "Trial" ? (
-                    <div className="border-2 text-xl bg-tomato border-black text-white w-[35%] p-[1rem] text-center rounded-xl">
-                      All modules have been selected
-                    </div>
+                    <>
+                      <div className="border-2 text-xl bg-tomato border-black text-white w-[35%] p-[1rem] text-center rounded-xl">
+                        All modules have been selected
+                      </div>
+                      <div className="text-xl text-gray-500">{`Disabled since you chose ${formData.licenseType}`}</div>
+                    </>
                   ) : (
                     <Button
                       className="cursor-pointer bg-tomato text-white rounded-xl"
@@ -272,92 +299,108 @@ const Desktop11 = ({
                     onBlur={(e) => {
                       if (!formData.noOfDays) {
                         setFormData({ ...formData, noOfDays: 1 });
+                      } else if (formData.noOfDays <= 0) {
+                        alert("Days cant be negative, setting it to 1 rn");
+                        setFormData({ ...formData, noOfDays: 1 });
                       }
+                      handleDisabledBlur;
                     }}
                     value={formData.noOfDays}
                     onChange={(e) => {
                       setFormData({ ...formData, noOfDays: e.target.value });
                     }}
+                    error={!!disabled}
+                    helperText={disabled}
                   />
-                </div>
-
-                <div className="grid gap-3">
-                  <div className="text-21xl font-bold">
-                    License Restrictions
+                  {/* {formData.licenseType === "Demo" || formData.licenseType === "Trial" ? ( <div className="text-xl text-gray-500">{`Disabled since you chose ${formData.licenseType}`}</div>) : } */}
+                  {formData.licenseType === "Demo" ||
+                  formData.licenseType === "Trial" ? (
+                    <div className="text-xl text-gray-500">{`Disabled since you chose ${formData.licenseType}`}</div>
+                  ) : null}
+                  <div className="grid gap-3">
+                    <div className="text-21xl font-bold">
+                      License Restrictions
+                    </div>
+                    <div className="text-5xl">
+                      {" "}
+                      Restricted "valid from date"
+                    </div>
+                    <TextField
+                      className=""
+                      sx={{ width: 400 }}
+                      color="secondary"
+                      variant="outlined"
+                      type="date"
+                      error={!!restrictions.date}
+                      onBlur={handleDateBlur}
+                      helperText={restrictions.date}
+                      value={formData.licenseRestrictionsDate}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          licenseRestrictionsDate: e.target.value,
+                        });
+                      }}
+                      id="licenserestrictiondateinput"
+                      placeholder="Active only after dd/mm/yyyy"
+                      margin="none"
+                    />
                   </div>
-                  <div className="text-5xl"> Restricted "valid from date"</div>
-                  <TextField
-                    className=""
-                    sx={{ width: 400 }}
-                    color="secondary"
-                    variant="outlined"
-                    type="date"
-                    error={!!restrictions.date}
-                    onBlur={handleDateBlur}
-                    helperText={restrictions.date}
-                    value={formData.licenseRestrictionsDate}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        licenseRestrictionsDate: e.target.value,
-                      });
-                    }}
-                    id="licenserestrictiondateinput"
-                    placeholder="Active only after dd/mm/yyyy"
-                    margin="none"
-                  />
-                </div>
 
-                <div className="grid gap-3">
-                  <div className="text-5xl"> Restricted "valid from time"</div>
-                  <TextField
-                    className=""
-                    sx={{ width: 400 }}
-                    color="secondary"
-                    variant="outlined"
-                    error={!!restrictions.time}
-                    helperText={restrictions.time}
-                    onBlur={handleTimeBlur}
-                    type="time"
-                    value={formData.licenseRestrictionsTime}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        licenseRestrictionsTime: e.target.value,
-                      });
-                    }}
-                    id="licenserestrictiontimeinput"
-                    placeholder="Active only after hh/mm/ss"
-                    margin="none"
-                  />
-                </div>
-
-                <div className="gap-3">
-                  <div className="text-21xl font-bold mb-5">
-                    Additional Comments
+                  <div className="grid gap-3">
+                    <div className="text-5xl">
+                      {" "}
+                      Restricted "valid from time"
+                    </div>
+                    <TextField
+                      className=""
+                      sx={{ width: 400 }}
+                      color="secondary"
+                      variant="outlined"
+                      error={!!restrictions.time}
+                      helperText={restrictions.time}
+                      onBlur={handleTimeBlur}
+                      type="time"
+                      value={formData.licenseRestrictionsTime}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          licenseRestrictionsTime: e.target.value,
+                        });
+                      }}
+                      id="licenserestrictiontimeinput"
+                      placeholder="Active only after hh/mm/ss"
+                      margin="none"
+                    />
                   </div>
-                  <TextField
-                    className=""
-                    sx={{ width: 500 }}
-                    color="secondary"
-                    value={formData.comments}
-                    onChange={(e) => {
-                      setFormData({ ...formData, comments: e.target.value });
-                    }}
-                    variant="outlined"
-                    multiline
-                    id="additionalCommentsInput"
-                    placeholder="Add in some comments here (IF APPLICABLE)"
-                    margin="none"
-                  />
-                </div>
 
-                <div
-                  className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
-                  onClick={handleSubmit}
-                  // to="/preview"
-                >
-                  <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
+                  <div className="gap-3">
+                    <div className="text-21xl font-bold mb-5">
+                      Additional Comments
+                    </div>
+                    <TextField
+                      className=""
+                      sx={{ width: 500 }}
+                      color="secondary"
+                      value={formData.comments}
+                      onChange={(e) => {
+                        setFormData({ ...formData, comments: e.target.value });
+                      }}
+                      variant="outlined"
+                      multiline
+                      id="additionalCommentsInput"
+                      placeholder="Add in some comments here (IF APPLICABLE)"
+                      margin="none"
+                    />
+                  </div>
+
+                  <div
+                    className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
+                    onClick={handleSubmit}
+                    // to="/preview"
+                  >
+                    <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
+                  </div>
                 </div>
               </div>
             </div>
