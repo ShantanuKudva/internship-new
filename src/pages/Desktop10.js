@@ -160,7 +160,7 @@ const Desktop10 = ({
   };
 
   const handlePageChange = (route) => {
-    route !== "/current-page";
+    route !== "/license-type";
     {
       // Replace 'current-page' with the current page's route
       const confirmed = window.confirm(
@@ -185,90 +185,77 @@ const Desktop10 = ({
           licenseRestrictionsDate: "",
           licenseRestrictionsTime: "",
           comments: "",
+          activeLink: "",
         });
       }
     }
     navigate(route);
   };
+  const [activeModal, setActiveModal] = useState(null);
+
+  const handleMouseEnter = (link) => {
+    setActiveModal(link);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveModal(null);
+  };
+
+  // Define an object to map link types to modal content
+  const modalContent = {
+    demo: "All Modules are enabled, 7 Days ",
+    production: "Custom Modules enabled, Custom Days",
+    trial: "All Modules enabled, 30 Days",
+    perpetual: "Custom Modules enabled, Custom Days",
+  };
+
   return (
     <div className="desktop-9-resp">
-      {/* <nav className="nav-container" id="navContainer">
-        <div className="nav-items relative">
-          <div
-            id="nextPageLink"
-            onClick={() => navigate("/")}
-            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-5 bg-none"
-          >
-            {
-              <TbArrowBackUp
-                style={{ transform: "scale(1.5)", color: "tomato" }}
-              />
-            }
-            <div className="bg-none text-xl mt-[0.6rem]">Home</div>
-          </div>
-          <div className="absolute left-[8rem]">
-            <div
-              className="cursor-pointer circle [text-decoration:none]"
-              onClick={handlePage1ButtonSubmit}
+      <div className="w-2/12 fixed">
+        <div className="left-div">
+          <div className=" grid h-[100vh]">
+            <Button
+              // sx={{ height: 100 }}
+              className="cursor-pointer bg-tomato text-white border-black border-4 relative"
+              variant="contained"
+              color="secondary"
+              onClick={() => handlePageChange("/history")}
             >
-              <div className="text-black ml-[-2rem] mt-[0.6rem]">1</div>
-              <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                Customer Info
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[752px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage3ButtonSubmit}
-            >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">3</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Details
-                </div>
-              </div>
-            </div>
+              <div className="text-5xl">History</div>
+              {/* Add a black bar before this button */}
+            </Button>
 
-            <div className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[384px] w-[82px] h-[83px] text-tomato">
-              <div className="red circle">
-                <div className="text-white ml-[-2rem] mt-[0.6rem]">2</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  License Type
-                </div>
-              </div>
-            </div>
-            <div
-              className="cursor-pointer [text-decoration:none] absolute top-[0px] left-[1119px] w-[82px] h-[83px] text-tomato"
-              onClick={handlePage4ButtonSubmit}
+            <Button
+              // sx={{ height: 100 }}
+              onClick={() => handlePageChange("/decrypt")}
+              className="cursor-pointer bg-tomato text-white relative"
+              variant="contained"
+              color="secondary"
             >
-              <div className="circle">
-                <div className="text-black ml-[-2rem] mt-[0.6rem]">4</div>
-                <div className="mt-5 text-xl w-32 text-black ml-[-1rem]">
-                  Preview
-                </div>
-              </div>
-            </div>
-            <img
-              className="absolute top-[40.5px] left-[138px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[499px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
-            <img
-              className="absolute top-[40.5px] left-[866px] w-[220px] h-[3px]"
-              alt=""
-              src="/line-11.svg"
-            />
+              <div className="text-5xl">Decrypt</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
+
+            <Button
+              // sx={{ height: 100 }}
+              onClick={() => handlePageChange("/")}
+              className="cursor-pointer bg-tomato text-white relative"
+              variant="contained"
+              color="secondary"
+            >
+              <div className="text-5xl">Home</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
           </div>
         </div>
-      </nav> */}
+      </div>
 
-      <nav className="nav-container" id="navContainer">
-        <div className="nav-items flex items-center justify-around gap-2">
-          {/* <div
+      <div className="w-10/12 ml-[16.6%]">
+        <nav className="nav-container" id="navContainer">
+          <div className="nav-items flex items-center justify-around gap-2">
+            {/* <div
             id="nextPageLink"
             onClick={() => navigate("/")}
             className="cursor-pointer grid items-center"
@@ -278,202 +265,250 @@ const Desktop10 = ({
             />
             <div className="text-xl ml-2 text-black mt-2">Home</div>
           </div> */}
-          <div className="ml-8" onClick={handlePage1ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle  flex items-center justify-center m-auto">
-                <div className="text-black">1</div>
+            <div className="ml-8" onClick={handlePage1ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle  flex items-center justify-center m-auto">
+                  <div className="text-black">1</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  Customer Info
+                </div>
               </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                Customer Info
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8">
+              <div className="wizard-step">
+                <div className="circle red flex items-center justify-center m-auto">
+                  <div className="text-white">2</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  License Type
+                </div>
+              </div>
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8" onClick={handlePage3ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle flex items-center justify-center m-auto">
+                  <div className="text-black ">3</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 w-[9rem]">
+                  License Details
+                </div>
+              </div>
+            </div>
+            <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
+            <div className="ml-8" onClick={handlePage4ButtonSubmit}>
+              <div className="wizard-step">
+                <div className="circle flex items-center justify-center">
+                  <div className="text-black">4</div>
+                </div>
+                <div className="text-center text-xl text-black mt-2 ">
+                  Preview
+                </div>
               </div>
             </div>
           </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8">
-            <div className="wizard-step">
-              <div className="circle red flex items-center justify-center m-auto">
-                <div className="text-white">2</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                License Type
-              </div>
-            </div>
-          </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8" onClick={handlePage3ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle flex items-center justify-center m-auto">
-                <div className="text-black ">3</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 w-[9rem]">
-                License Details
-              </div>
-            </div>
-          </div>
-          <div className="bg-black w-[12rem] h-[2px] mb-8"></div>
-          <div className="ml-8" onClick={handlePage4ButtonSubmit}>
-            <div className="wizard-step">
-              <div className="circle flex items-center justify-center">
-                <div className="text-black">4</div>
-              </div>
-              <div className="text-center text-xl text-black mt-2 ">
-                Preview
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+        </nav>
 
-      <div className="main-div">
-        <div className="left-div" style={{ backgroundColor: "#F6E8DD" }}>
-          <div className=" grid gap-2">
-            <Button
-              sx={{ height: 100 }}
-              className="cursor-pointer bg-tomato text-white m-10 "
-              variant="contained"
-              color="secondary"
-              onClick={() => handlePageChange("/history")}
-            >
-              History
-            </Button>
-            <div className="h-[10rem] w-[2px] bg-black m-auto"></div>
-            <Button
-              sx={{ height: 100 }}
-              onClick={() => handlePageChange("/decrypt")}
-              className="cursor-pointer bg-tomato text-white m-10"
-              variant="contained"
-              color="secondary"
-            >
-              Decrypt
-            </Button>
-            <div className="h-[10rem] w-[2px] bg-black m-auto"></div>
-            <Button
-              sx={{ height: 100 }}
-              onClick={() => handlePageChange("/")}
-              className="cursor-pointer bg-tomato text-white m-10"
-              variant="contained"
-              color="secondary"
-            >
-              Home
-            </Button>
-          </div>
-        </div>
+        <div className="main-div">
+          <div className="right-div">
+            <div className="grid w-[70%] m-auto gap-5 mt-10">
+              <div className="font-bold text-21xl" id="pageTwoSubheading">
+                License Type:
+              </div>
 
-        <div className="right-div">
-          <div className="grid w-[70%] m-auto gap-5 mt-10">
-            <div className="font-bold text-21xl" id="pageTwoSubheading">
-              License Type:
-            </div>
+              <div className="text-6xl" id="pageTwoHeading">
+                Pick the type of Subscription
+              </div>
 
-            <div className="text-6xl" id="pageTwoHeading">
-              Pick the type of Subscription
-            </div>
-
-            <div className="button-divs">
-              <div
-                onClick={() => {
-                  setActiveLink("demo");
-                }}
-                style={{
-                  backgroundColor:
-                    activeLink === "demo" ? "#EB5351" : "whitesmoke",
-                  color: activeLink === "demo" ? "white" : "black",
-                  cursor: "pointer",
-                }}
-                className=" relative rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px] "
-              >
+              {/* <div className="button-divs">
                 <div
+                  onClick={() => {
+                    setActiveLink("demo");
+                  }}
                   style={{
+                    backgroundColor:
+                      activeLink === "demo" ? "#EB5351" : "whitesmoke",
                     color: activeLink === "demo" ? "white" : "black",
                     cursor: "pointer",
+                    border: "2px solid black",
+                    display: "flex", // Add flex display
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    height: "100px", // Set a fixed height (adjust as needed)
                   }}
-                  className="absolute left-14 top-3 text-xl font-hp-simplified-jpan text-black "
+                  className="relative"
                 >
-                  <div className="text-21xl">Demo License</div>
-                  <div className="font-light">All Modules Enabled</div>
-                  <div className="font-light">7 Days</div>
+                  <div
+                    style={{
+                      color: activeLink === "demo" ? "white" : "black",
+                      cursor: "pointer",
+                      textAlign: "center", // Center the text within this div
+                    }}
+                    className="text-black"
+                  >
+                    <div className="text-5xl text-center">Demo License</div>
+                  </div>
                 </div>
-              </div>
-              <div
-                onClick={() => {
-                  setActiveLink("production");
-                }}
-                style={{
-                  backgroundColor:
-                    activeLink === "production" ? "#EB5351" : "whitesmoke",
-                  color: activeLink === "production" ? "white" : "black",
-                  cursor: "pointer",
-                }}
-                className=" relative rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px] "
-              >
+
                 <div
+                  onClick={() => {
+                    setActiveLink("production");
+                  }}
                   style={{
+                    backgroundColor:
+                      activeLink === "production" ? "#EB5351" : "whitesmoke",
                     color: activeLink === "production" ? "white" : "black",
                     cursor: "pointer",
+                    border: "2px solid black",
+                    display: "flex", // Add flex display
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    height: "100px", // Set a fixed height (adjust as needed)
                   }}
-                  className="absolute left-10 top-3 text-xl font-hp-simplified-jpan text-black "
+                  className="relative"
                 >
-                  <div className="text-21xl">Production License</div>
-                  <div className="font-light">Custom Modules Enabled</div>
-                  <div className="font-light">Custom Days</div>
+                  <div
+                    style={{
+                      color: activeLink === "production" ? "white" : "black",
+                      cursor: "pointer",
+                      textAlign: "center", // Center the text within this div
+                    }}
+                    className="text-black"
+                  >
+                    <div className="text-5xl text-center">
+                      Production License
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div
-                onClick={() => {
-                  setActiveLink("trial");
-                }}
-                style={{
-                  backgroundColor:
-                    activeLink === "trial" ? "#EB5351" : "whitesmoke",
-                  color: activeLink === "trial" ? "white" : "black",
-                  cursor: "pointer",
-                }}
-                className=" relative rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px] "
-              >
+
                 <div
+                  onClick={() => {
+                    setActiveLink("trial");
+                  }}
                   style={{
+                    backgroundColor:
+                      activeLink === "trial" ? "#EB5351" : "whitesmoke",
                     color: activeLink === "trial" ? "white" : "black",
                     cursor: "pointer",
+                    border: "2px solid black",
+                    display: "flex", // Add flex display
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    height: "100px", // Set a fixed height (adjust as needed)
                   }}
-                  className="absolute left-10 top-3 text-xl font-hp-simplified-jpan text-black "
+                  className="relative"
                 >
-                  <div className="text-21xl">Trial License</div>
-                  <div className="font-light">All Modules Enabled</div>
-                  <div className="font-light">30 Days</div>
+                  <div
+                    style={{
+                      color: activeLink === "trial" ? "white" : "black",
+                      cursor: "pointer",
+                      textAlign: "center", // Center the text within this div
+                    }}
+                    className="text-black"
+                  >
+                    <div className="text-5xl text-center">Trial License</div>
+                  </div>
                 </div>
-              </div>
-              <div
-                onClick={() => {
-                  setActiveLink("perpetual");
-                }}
-                style={{
-                  backgroundColor:
-                    activeLink === "perpetual" ? "#EB5351" : "whitesmoke",
-                  color: activeLink === "perpetual" ? "white" : "black",
-                  cursor: "pointer",
-                }}
-                className=" relative rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px]"
-              >
+
                 <div
+                  onClick={() => {
+                    setActiveLink("perpetual");
+                  }}
                   style={{
+                    backgroundColor:
+                      activeLink === "perpetual" ? "#EB5351" : "whitesmoke",
                     color: activeLink === "perpetual" ? "white" : "black",
                     cursor: "pointer",
+                    border: "2px solid black",
+                    display: "flex", // Add flex display
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    height: "100px", // Set a fixed height (adjust as needed)
                   }}
-                  className="absolute left-10 top-3 text-xl font-hp-simplified-jpan text-black "
+                  className="relative"
                 >
-                  <div className="text-21xl">Perpetual License</div>
-                  <div className="font-light">Custom Modules</div>
-                  <div className="font-light">Unlimited Days</div>
+                  <div
+                    style={{
+                      color: activeLink === "perpetual" ? "white" : "black",
+                      cursor: "pointer",
+                      textAlign: "center", // Center the text within this div
+                    }}
+                    className="text-black"
+                  >
+                    <div className="text-5xl text-center">
+                      Perpetual License
+                    </div>
+                  </div>
                 </div>
+              </div> */}
+
+              <div className="button-divs">
+                {["demo", "production", "trial", "perpetual"].map((link) => (
+                  <div
+                    key={link}
+                    onClick={() => {
+                      setActiveLink(link);
+                    }}
+                    onMouseEnter={() => handleMouseEnter(link)} // Set activeModal on hover
+                    onMouseLeave={handleMouseLeave} // Clear activeModal on mouse leave
+                    style={{
+                      backgroundColor:
+                        activeLink === link ? "#EB5351" : "whitesmoke",
+                      color: activeLink === link ? "white" : "black",
+                      cursor: "pointer",
+                      border: "2px solid black",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100px",
+                      position: "relative",
+                    }}
+                    className="relative"
+                  >
+                    <div
+                      style={{
+                        color: activeLink === link ? "white" : "black",
+                        cursor: "pointer",
+                        textAlign: "center",
+                      }}
+                      className="text-black"
+                    >
+                      <div className="text-5xl text-center">
+                        {`${link.charAt(0).toUpperCase()}${link.slice(
+                          1
+                        )} License`}
+                      </div>
+                    </div>
+
+                    {/* Modal that appears on hover */}
+                    {activeModal === link && (
+                      <div
+                        className="absolute top-20 left-10 w-80 text-xl rounded-lg p-5"
+                        style={{
+                          zIndex: 2,
+                          color: "black",
+                          opacity: activeLink == link ? 0 : 1,
+                          backgroundColor: "#F6E8DD",
+                        }}
+                      >
+                        {/* Modal content goes here */}
+                        {modalContent[link]}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
+
+              <button
+                id="nextPageLink"
+                onClick={handleNextButtonSubmit}
+                className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
+              >
+                <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
+              </button>
             </div>
-            <button
-              id="nextPageLink"
-              onClick={handleNextButtonSubmit}
-              className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato m-auto my-10 rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
-            >
-              <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step`}</div>
-            </button>
           </div>
         </div>
       </div>

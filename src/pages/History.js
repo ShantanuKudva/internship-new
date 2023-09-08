@@ -17,8 +17,7 @@ export default function History() {
 
   const getHistory = async () => {
     const res = await axios.get(API_BASE + "/history");
-    // console.log(res.data);
-    await setData(res.data);
+    setData(res.data);
   };
 
   const rows = data;
@@ -32,19 +31,19 @@ export default function History() {
     {
       field: "name",
       headerName: "Name",
-      width: 300,
+      width: 200,
       headerClassName: "bold-header",
     },
     {
       field: "timestamp",
       headerName: "Timestamp",
-      width: 300,
+      width: 200,
       headerClassName: "bold-header",
     },
     {
       field: "encryptedLicense",
       headerName: "Encrypted License",
-      width: 400,
+      width: 350,
       headerClassName: "bold-header",
     },
     {
@@ -55,13 +54,6 @@ export default function History() {
       headerClassName: "bold-header",
       filterable: false,
       renderCell: (params) => (
-        // <Button
-        //   color="secondary"
-        //   className="bg-tomato text-white"
-        //   onClick={() => handleDownloadClick(params.row)}
-        // >
-        //   Download
-        // </Button>
         <Button
           // sx={{ height:  }}
           className="cursor-pointer bg-tomato text-white m-10 "
@@ -80,41 +72,91 @@ export default function History() {
     const blob = new Blob([jsonData], { type: "application/json" });
     FileSaver.saveAs(blob, `data_${rowData._id}.json`);
   };
+
+  const handlePageChange = (route) => {
+    navigate(route);
+  };
+
   return (
     <>
-      <nav className="nav-container-2" id="navContainer">
-        <div className="nav-items relative">
-          <div
-            id="nextPageLink"
-            onClick={() => navigate("/")}
-            className="[text-decoration:none] cursor-pointer [border:none] absolute left-0 top-[0.1rem] bg-none"
-          >
-            {
-              <TbArrowBackUp
-                style={{ transform: "scale(6)", color: "tomato" }}
-              />
-            }
-            <div className="bg-none text-xl mt-3">Home</div>
+      <div className="w-2/12 fixed">
+        <div className="left-div">
+          <div className=" grid h-[100vh]">
+            <Button
+              // sx={{ height: 100 }}
+              className="cursor-pointer bg-white text-tomato border-black border-4 relative hover:bg-white"
+              variant="contained"
+              // color="secondary"
+              // onClick={() => handlePageChange("/history")}
+            >
+              <div className="text-5xl">History</div>
+              {/* Add a black bar before this button */}
+            </Button>
+
+            <Button
+              // sx={{ height: 100 }}
+              onClick={() => handlePageChange("/decrypt")}
+              className="cursor-pointer bg-tomato text-white relative"
+              variant="contained"
+              color="secondary"
+            >
+              <div className="text-5xl">Decrypt</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
+
+            <Button
+              // sx={{ height: 100 }}
+              onClick={() => handlePageChange("/")}
+              className="cursor-pointer bg-tomato text-white relative"
+              variant="contained"
+              color="secondary"
+            >
+              <div className="text-5xl">Home</div>
+              {/* Add a black bar before this button */}
+              <div className="absolute top-0 left-[50%] translate-x-[-50%] w-[70%] h-[2px] bg-white justify-center"></div>
+            </Button>
           </div>
         </div>
-      </nav>
-      <div className="w-[100%] m-auto ">
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          // rowHeight={50}
-          getRowId={(row) => row._id}
-          components={{
-            Toolbar: GridToolbar, // To display the search bar
-          }}
-          onFilterModelChange={(model) => {
-            if (model.items.length > 0) {
-              setSearchText(model.items[0].value);
-            } else {
-              setSearchText("");
-            }
-          }}
-        />
+      </div>
+
+      <div className="w-10/12 ml-[16.6%]">
+        <div className="w-[90%] m-auto ">
+          <DataGrid
+            sx={{
+              "& .MuiDataGrid-root": {
+                border: "2px solid tomato", // Tomato-colored border for the entire DataGrid
+              },
+              "& .MuiDataGrid-cell": {
+                border: "2px solid tomato", // Tomato-colored border for individual cells
+                borderRight: "none", // Remove right border for cells
+                borderTop: "none", // Remove top border for cells
+                // Add more CSS for customization as needed
+              },
+              "& .MuiDataGrid-columnHeader": {
+                border: "2px solid tomato", // Tomato-colored border for individual cells
+                borderRight: "none", // Remove right border for cells
+                borderTop: "none", // Remove top border for cells
+                // Add more CSS for customization as needed
+              },
+            }}
+            rows={rows}
+            columns={columns}
+            // rowHeight={50}
+            getRowId={(row) => row._id}
+            components={{
+              Toolbar: GridToolbar, // To display the search bar
+            }}
+            onFilterModelChange={(model) => {
+              if (model.items.length > 0) {
+                setSearchText(model.items[0].value);
+              } else {
+                setSearchText("");
+              }
+            }}
+            showCellRightBorder={true}
+          />
+        </div>
       </div>
     </>
   );
